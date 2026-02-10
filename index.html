@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarun Jena — Portfolio</title>
+  <meta name="description" content="Tarun Jena — Data Analyst & Business Analytics portfolio." />
+
+  <!-- Font (clean editorial) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="progress" id="progress"></div>
+
+  <!-- Minimal top nav -->
+  <header class="nav">
+    <a class="brand" href="#top">Tarun Jena</a>
+    <button class="menuBtn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+      ☰
+    </button>
+  </header>
+
+  <!-- Fullscreen menu (we’ll wire it up next) -->
+  <nav id="menu" class="menu" aria-hidden="true">
+    <button class="menuClose" type="button" aria-label="Close menu">✕</button>
+    <div class="menuLinks">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="assets/cv/Tarun_jena_cv.pdf" class="menuCV" target="_blank" rel="noopener">
+  Download CV
+</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="heroInner">
+      <h1 class="heroName">
+        Tarun<br />
+        Jena
+      </h1>
+
+      <p class="heroSub">
+        Data Analyst & Business Analytics Graduate — SQL · Python · Power BI
+      </p>
+    </div>
+     <div class="heroAside" aria-hidden="true">
+    <span>DATA · ANALYTICS · DECISIONS</span>
+  </div>
+
+    <div class="scrollHint" aria-hidden="true">
+      <span class="scrollDot"></span>
+      <span>scroll</span>
+    </div>
+  </main>
+  <!-- ABOUT -->
+<section id="about" class="section about reveal">
+  <div class="sectionInner">
+    <span class="sectionLabel">About</span>
+
+    <h2 class="sectionTitle">
+      I’m a data analyst with a computer science foundation,
+      focused on turning complex data into clear,
+      decision-ready insights.
+    </h2>
+
+    <div class="aboutGrid">
+      <p>
+        Currently pursuing an MSc in <strong>Business Analytics & Decision Science</strong>
+        at the University of Leeds, I work across marketing analytics, KPI design,
+        experimentation concepts, and dashboard development.
+      </p>
+
+      <p>
+        I enjoy working at the intersection of <strong>data, business, and communication</strong> —
+        using SQL, Python, and BI tools to support better decisions in fast-paced environments.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- PROJECTS -->
+<section id="projects" class="section projects">
+  <div class="sectionInner">
+    <span class="sectionLabel">Projects</span>
+
+    <h2 class="sectionTitle">
+      Selected work — modelling, segmentation, and decision-focused analytics.
+    </h2>
+
+    <div class="projectsWrap">
+      <!-- Project 1 -->
+      <article class="projectBlock revealProject" data-parallax>
+        <div class="projectText">
+          <p class="projectKicker">Unsupervised Learning • Risk Segmentation</p>
+          <h3 class="projectTitle">Credit Risk Segmentation (EDA + K-Means)</h3>
+
+          <p class="projectDesc">
+            <strong>Problem:</strong> No “default” label available — needed a way to understand risk patterns without supervised prediction.
+            <br><br>
+            <strong>Approach:</strong> Cleaned and explored a Kaggle dataset (51,336 customers), ran correlation checks, built a K-Means model (k=4),
+            visualised clusters with PCA, and created a simple risk scoring approach.
+            <br><br>
+            <strong>Outcome:</strong> Segmented customers into <em>Low</em>, <em>Medium</em>, <em>High</em>, and <em>No Credit History</em> groups to support decision-making.
+          </p>
+            <p class="impactLine">
+            <span>Impact</span>
+            Segmented <strong>51,336 customers</strong> into <strong>4 risk profiles</strong> to support
+            decision-making without default labels.
+        </p>
+
+          <div class="projectMeta">
+            <span class="pill">Python</span>
+            <span class="pill">pandas / NumPy</span>
+            <span class="pill">scikit-learn</span>
+            <span class="pill">K-Means</span>
+            <span class="pill">PCA</span>
+          </div>
+
+          <div class="projectLinks">
+            <a class="linkBtn" href="https://github.com/doppy-bot/Credit-Risk-Segmentation" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="projectMedia">
+          <div class="mediaFrame">
+            <!-- Optional: you can replace with your own screenshot -->
+            <img
+              src="https://raw.githubusercontent.com/doppy-bot/Credit-Risk-Segmentation/main/Clusters.png"
+              alt="Credit risk clustering visual"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="projectBlock revealProject" data-parallax>
+        <div class="projectText">
+          <p class="projectKicker">Fairness • Responsible AI</p>
+          <h3 class="projectTitle">Fairness & Bias in Income Prediction</h3>
+
+          <p class="projectDesc">
+            <strong>Problem:</strong> Accuracy alone can hide harm — evaluated whether an income model treats demographic groups differently.
+            <br><br>
+            <strong>Approach:</strong> Built a baseline Logistic Regression model and evaluated fairness using
+            <em>Demographic Parity</em>, <em>Disparate Impact Ratio</em>, and <em>Equal Opportunity</em>.
+            Then ran an intersectional analysis (Gender × Race).
+            <br><br>
+            <strong>Key finding:</strong> Observed unequal selection rates and differing true positive rates across groups, with compounded disadvantage in intersectional slices.
+          </p>
+          <p class="impactLine">
+  <span>Key Finding</span>
+  Identified <strong>unequal selection rates</strong> across demographic groups using
+  parity and equal-opportunity metrics.
+</p>
+
+          <div class="projectMeta">
+            <span class="pill">Python</span>
+            <span class="pill">Logistic Regression</span>
+            <span class="pill">Fairness Metrics</span>
+            <span class="pill">Intersectional Analysis</span>
+          </div>
+
+          <div class="projectLinks">
+            <a class="linkBtn" href="https://github.com/doppy-bot/Fairness-Bias-Income-Prediction" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="projectMedia">
+          <div class="mediaFrame">
+            <img
+              src="https://raw.githubusercontent.com/doppy-bot/Fairness-Bias-Income-Prediction/main/intersectional_income_heatmap.png"
+              alt="Intersectional fairness heatmap"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="projectBlock revealProject" data-parallax>
+        <div class="projectText">
+          <p class="projectKicker">Forecasting • Simulation</p>
+          <h3 class="projectTitle">Premier League Table Prediction (API + Monte Carlo)</h3>
+
+          <p class="projectDesc">
+            <strong>Problem:</strong> Forecast end-of-season outcomes using match history + remaining fixtures.
+            <br><br>
+            <strong>Approach:</strong> Pulled match data via football-data.org API, engineered rolling performance features,
+            trained a Random Forest classifier for match outcome probabilities, then ran a Monte Carlo simulation (5,000 runs).
+            <br><br>
+            <strong>Output:</strong> Title / Top-4 / Relegation probabilities + scenario-based visualisations.
+          </p>
+          <p class="impactLine">
+  <span>Output</span>
+  Generated <strong>Top-4 and relegation probabilities</strong> using
+  <strong>5,000 Monte Carlo simulations</strong>.
+</p>
+
+          <div class="projectMeta">
+            <span class="pill">Python</span>
+            <span class="pill">Random Forest</span>
+            <span class="pill">Feature Engineering</span>
+            <span class="pill">Monte Carlo (5,000)</span>
+          </div>
+
+          <div class="projectLinks">
+            <a class="linkBtn" href="https://github.com/doppy-bot/Premier_League_Prediction-using-API-" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="projectMedia">
+          <div class="mediaFrame">
+            <img
+              src="https://raw.githubusercontent.com/doppy-bot/Premier_League_Prediction-using-API-/main/Top%204.png"
+              alt="Premier League Top 4 probability"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- MORE PROJECTS -->
+<section id="more-projects" class="section moreProjects reveal">
+  <div class="sectionInner">
+    <span class="sectionLabel">More Projects</span>
+
+    <h2 class="sectionTitle">
+      Additional work — experiments, dashboards, and modelling.
+    </h2>
+
+    <div class="moreGrid">
+      <article class="moreCard">
+        <div class="moreTop">
+          <h3>Click-Fraud Detection (AdTech)</h3>
+          <span class="miniTag">ML Pipeline</span>
+        </div>
+        <p>
+          Built an end-to-end fraud detection pipeline with feature engineering and model comparison
+          (Logistic Regression, SVM, Random Forest) using precision/recall for risk-based decisions.
+        </p>
+        <div class="moreMeta">
+          <span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">Precision/Recall</span>
+        </div>
+        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
+      </article>
+
+      <article class="moreCard">
+        <div class="moreTop">
+          <h3>Market Analysis & Forecasting (S&P 500)</h3>
+          <span class="miniTag">Forecasting</span>
+        </div>
+        <p>
+          Analysed historical market data to identify trends and volatility patterns, then built baseline
+          forecasting models (Linear Regression, Random Forest) and evaluated performance with RMSE and R².
+        </p>
+        <div class="moreMeta">
+          <span class="pill">Python</span><span class="pill">EDA</span><span class="pill">RMSE/R²</span>
+        </div>
+        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
+      </article>
+
+      <article class="moreCard">
+        <div class="moreTop">
+          <h3>Marketing KPI Dashboard</h3>
+          <span class="miniTag">BI</span>
+        </div>
+        <p>
+          Designed a self-serve dashboard to monitor conversion rates, revenue trends, and segmentation.
+          Automated reporting workflows to reduce manual work by ~25%.
+        </p>
+        <div class="moreMeta">
+          <span class="pill">Power BI</span><span class="pill">Excel</span><span class="pill">Dashboards</span>
+        </div>
+        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">Preview</a>
+      </article>
+
+      <article class="moreCard">
+        <div class="moreTop">
+          <h3>Data Ethics: Bias Analysis</h3>
+          <span class="miniTag">Responsible AI</span>
+        </div>
+        <p>
+          Assessed demographic disparities using fairness metrics (Demographic Parity, Disparate Impact,
+          Equal Opportunity) and documented ethical implications for non-technical stakeholders.
+        </p>
+        <div class="moreMeta">
+          <span class="pill">Fairness</span><span class="pill">Metrics</span><span class="pill">Documentation</span>
+        </div>
+        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- HIGHLIGHTS -->
+<section class="section highlights reveal" aria-label="Highlights">
+  <div class="sectionInner">
+    <span class="sectionLabel">Highlights</span>
+
+    <div class="highGrid">
+      <div class="highItem">
+        <div class="highNum">51k+</div>
+        <div class="highLabel">Records analysed</div>
+      </div>
+
+      <div class="highItem">
+        <div class="highNum">5,000</div>
+        <div class="highLabel">Monte Carlo simulations</div>
+      </div>
+
+      <div class="highItem">
+        <div class="highNum">25%</div>
+        <div class="highLabel">Reporting time reduced</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS (Editorial typography style) -->
+<section id="skills" class="section skillsEditorial reveal">
+  <div class="sectionInner skillsWrap">
+
+    <span class="sectionLabel">Skills</span>
+
+    <div class="skillsGrid">
+      <!-- LEFT: BIG TYPE CATEGORIES -->
+      <ul class="skillsCategories" id="skillCats">
+        <li class="skillCat is-active" data-cat="analytics">
+          Analytics
+        </li>
+        <li class="skillCat" data-cat="experimentation">
+          Experimentation
+        </li>
+        <li class="skillCat" data-cat="programming">
+          Programming
+        </li>
+        <li class="skillCat" data-cat="bi">
+          BI & Visualisation
+        </li>
+        <li class="skillCat" data-cat="tools">
+          Libraries & Tools
+        </li>
+        <li class="skillCat" data-cat="ethics">
+          Data Ethics
+        </li>
+      </ul>
+
+      <!-- RIGHT: EDITORIAL DETAIL -->
+      <aside class="skillsDetail" id="skillsPanel">
+        <h3 class="skillsTitle" id="panelTitle">Analytics</h3>
+        <p class="skillsDesc" id="panelDesc"></p>
+
+        <div class="skillsInline" id="panelPills"></div>
+      </aside>
+    </div>
+
+  </div>
+</section>
+<!-- CONTACT -->
+<section id="contact" class="section contactSection reveal">
+  <div class="sectionInner contactInner">
+    <span class="sectionLabel">Contact</span>
+
+    <h2 class="contactTitle">
+      Let’s build something useful with data.
+    </h2>
+
+    <p class="contactText">
+      If you’re hiring for analytics roles (Marketing / BI / Product), I’d love to talk.
+      The fastest way to reach me is email.
+    </p>
+
+    <div class="contactLinks">
+      <a class="contactBtn" href="mailto:tarunjena2001@gmail.com">Email</a>
+      <a class="contactBtn ghost" href="https://www.linkedin.com/in/tarun-jena07/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a class="contactBtn ghost" href="https://github.com/doppy-bot" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+
+    <!-- Optional: minimal form (sends via mailto; simple) -->
+    <form class="contactForm" action="mailto:tarunjena2001@gmail.com" method="post" enctype="text/plain">
+      <div class="formRow">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+      </div>
+      <textarea name="message" placeholder="Message" required></textarea>
+      <button class="contactBtn" type="submit">Send</button>
+    </form>
+
+    <footer class="siteFooter">
+      <span>© <span id="year"></span> Tarun Jena</span>
+      <span class="footerNote">Built with HTML, CSS & JS</span>
+    </footer>
+  </div>
+</section>
+
+  <script src="script.js"></script>
+</body>
+</html>
