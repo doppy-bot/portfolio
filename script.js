@@ -190,7 +190,7 @@ window.addEventListener("scroll", () => {
 
 
 // ===== POLISH: active menu link while scrolling =====
-const navLinks = document.querySelectorAll(".menuLinks a[href^='#']");
+const navLinks = document.querySelectorAll(".menuLinks a[href^='#'], .navLinks a[href^='#']");
 const sections = Array.from(navLinks)
   .map(a => document.querySelector(a.getAttribute("href")))
   .filter(Boolean);

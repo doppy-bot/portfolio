@@ -1,0 +1,86 @@
+<svg viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0d12"/>
+      <stop offset="100%" stop-color="#07080b"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#5EEAD4" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#5EEAD4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="100%" cy="100%" r="70%">
+      <stop offset="0%" stop-color="#8B93FF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#8B93FF" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5EEAD4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="640" fill="url(#bg)"/>
+  <rect width="900" height="640" fill="url(#glow1)"/>
+  <rect width="900" height="640" fill="url(#glow2)"/>
+
+  <text x="40" y="52" fill="#99A1B3" font-size="12" letter-spacing="2.5" font-weight="600">RAG FINANCE ASSISTANT — ARCHITECTURE</text>
+  <text x="40" y="78" fill="#F3F5F8" font-size="21" font-weight="600">Local retrieval-augmented generation, zero cloud dependency</text>
+
+  <!-- Stage 1: User Question -->
+  <g>
+    <rect x="40" y="120" width="230" height="86" rx="16" fill="rgba(255,255,255,0.045)" stroke="rgba(255,255,255,0.14)"/>
+    <text x="62" y="152" fill="#5EEAD4" font-size="11" letter-spacing="1.5" font-weight="700">01 · INPUT</text>
+    <text x="62" y="178" fill="#F3F5F8" font-size="16" font-weight="600">User question</text>
+  </g>
+
+  <line x1="270" y1="163" x2="322" y2="163" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: FAISS -->
+  <g>
+    <rect x="330" y="120" width="250" height="86" rx="16" fill="rgba(255,255,255,0.045)" stroke="rgba(255,255,255,0.14)"/>
+    <text x="352" y="152" fill="#5EEAD4" font-size="11" letter-spacing="1.5" font-weight="700">02 · RETRIEVE</text>
+    <text x="352" y="178" fill="#F3F5F8" font-size="16" font-weight="600">FAISS vector store</text>
+  </g>
+
+  <line x1="580" y1="163" x2="632" y2="163" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: knowledge base (below FAISS, feeding in) -->
+  <g>
+    <rect x="330" y="252" width="250" height="140" rx="16" fill="rgba(139,147,255,0.06)" stroke="rgba(139,147,255,0.25)"/>
+    <text x="352" y="284" fill="#8B93FF" font-size="11" letter-spacing="1.5" font-weight="700">KNOWLEDGE BASE</text>
+    <text x="352" y="308" fill="#C9CEDA" font-size="13">Credit risk segmentation.md</text>
+    <text x="352" y="330" fill="#C9CEDA" font-size="13">Fairness &amp; bias prediction.md</text>
+    <text x="352" y="352" fill="#C9CEDA" font-size="13">Premier League prediction.md</text>
+    <text x="352" y="374" fill="#C9CEDA" font-size="13">CV — Tarun Jena.pdf</text>
+  </g>
+  <line x1="455" y1="252" x2="455" y2="208" stroke="#8B93FF" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: Prompt builder -->
+  <g>
+    <rect x="640" y="120" width="220" height="86" rx="16" fill="rgba(255,255,255,0.045)" stroke="rgba(255,255,255,0.14)"/>
+    <text x="662" y="152" fill="#5EEAD4" font-size="11" letter-spacing="1.5" font-weight="700">03 · AUGMENT</text>
+    <text x="662" y="178" fill="#F3F5F8" font-size="16" font-weight="600">Prompt builder</text>
+  </g>
+
+  <line x1="750" y1="206" x2="750" y2="252" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: LLaMA -->
+  <g>
+    <rect x="600" y="260" width="260" height="86" rx="16" fill="rgba(255,255,255,0.045)" stroke="rgba(255,255,255,0.14)"/>
+    <text x="622" y="292" fill="#5EEAD4" font-size="11" letter-spacing="1.5" font-weight="700">04 · GENERATE</text>
+    <text x="622" y="318" fill="#F3F5F8" font-size="16" font-weight="600">LLaMA 3.2 (Ollama, local)</text>
+  </g>
+
+  <line x1="730" y1="346" x2="730" y2="392" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 6: Answer -->
+  <g>
+    <rect x="600" y="400" width="260" height="94" rx="16" fill="rgba(94,234,212,0.08)" stroke="rgba(94,234,212,0.4)"/>
+    <text x="622" y="432" fill="#5EEAD4" font-size="11" letter-spacing="1.5" font-weight="700">05 · OUTPUT</text>
+    <text x="622" y="456" fill="#F3F5F8" font-size="16" font-weight="600">Grounded answer</text>
+    <text x="622" y="476" fill="#99A1B3" font-size="12">+ source citations</text>
+  </g>
+
+  <!-- footer tech row -->
+  <line x1="40" y1="540" x2="860" y2="540" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="40" y="572" fill="#99A1B3" font-size="12">LangChain · FAISS · Ollama (LLaMA 3.2) · OllamaEmbeddings · Streamlit</text>
+  <text x="40" y="598" fill="#6B7386" font-size="12">Every answer traces back to a real source document — no hallucination, no vague generalisations.</text>
+</svg>

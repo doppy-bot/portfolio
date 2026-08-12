@@ -9,7 +9,7 @@
   <!-- Font (clean editorial) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,12 +17,33 @@
 <body>
     <div class="progress" id="progress"></div>
 
+    <!-- Ambient floating glass orbs — signature motif (data points clustering) -->
+    <div class="orbField" aria-hidden="true">
+      <div class="orb"></div>
+      <div class="orb violet"></div>
+      <div class="orb"></div>
+      <div class="orb violet"></div>
+      <div class="orb"></div>
+      <div class="orb violet"></div>
+    </div>
+
   <!-- Minimal top nav -->
   <header class="nav">
     <a class="brand" href="#top">Tarun Jena</a>
-    <button class="menuBtn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
-      ☰
-    </button>
+
+    <nav class="navLinks" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="navActions">
+      <a class="navCV" href="assets/cv/Tarun_jena_cv.pdf" target="_blank" rel="noopener">Résumé</a>
+      <button class="menuBtn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
   </header>
 
   <!-- Fullscreen menu (we’ll wire it up next) -->
@@ -41,6 +62,12 @@
 
   <!-- HERO -->
   <main id="top" class="hero">
+    <div class="heroOrbs" aria-hidden="true">
+      <div class="orb"></div>
+      <div class="orb violet"></div>
+      <div class="orb"></div>
+      <div class="orb violet"></div>
+    </div>
     <div class="heroInner">
       <h1 class="heroName">
         Tarun<br />
@@ -63,7 +90,7 @@
   <!-- ABOUT -->
 <section id="about" class="section about reveal">
   <div class="sectionInner">
-    <span class="sectionLabel">About</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>About</span>
 
     <h2 class="sectionTitle">
       I’m a data analyst with a computer science foundation,
@@ -88,52 +115,50 @@
 <!-- PROJECTS -->
 <section id="projects" class="section projects">
   <div class="sectionInner">
-    <span class="sectionLabel">Projects</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Projects</span>
 
     <h2 class="sectionTitle">
-      Selected work — modelling, segmentation, and decision-focused analytics.
+      Selected work — modelling, experimentation, and decision-focused analytics.
     </h2>
 
     <div class="projectsWrap">
       <!-- Project 1 -->
       <article class="projectBlock revealProject" data-parallax>
         <div class="projectText">
-          <p class="projectKicker">Unsupervised Learning • Risk Segmentation</p>
-          <h3 class="projectTitle">Credit Risk Segmentation (EDA + K-Means)</h3>
+          <p class="projectKicker">Credit Risk • Explainable AI</p>
+          <h3 class="projectTitle">Credit Risk Decision System (XGBoost + SHAP)</h3>
 
           <p class="projectDesc">
-            <strong>Problem:</strong> No “default” label available — needed a way to understand risk patterns without supervised prediction.
+            <strong>Problem:</strong> A default-risk model is only useful if a credit team can trust and act on it — a black-box score isn't enough.
             <br><br>
-            <strong>Approach:</strong> Cleaned and explored a Kaggle dataset (51,336 customers), ran correlation checks, built a K-Means model (k=4),
-            visualised clusters with PCA, and created a simple risk scoring approach.
+            <strong>Approach:</strong> Engineered features from credit bureau data, trained an XGBoost model to predict Probability of Default,
+            and wrapped it in a business decision engine (Approve / Reject) with SHAP-based explainability behind every call.
             <br><br>
-            <strong>Outcome:</strong> Segmented customers into <em>Low</em>, <em>Medium</em>, <em>High</em>, and <em>No Credit History</em> groups to support decision-making.
+            <strong>Outcome:</strong> Shipped as an interactive Streamlit dashboard, so a reviewer sees not just the decision but <em>why</em> — which features pushed a case toward approval or rejection.
           </p>
-            <p class="impactLine">
+          <p class="impactLine">
             <span>Impact</span>
-            Segmented <strong>51,336 customers</strong> into <strong>4 risk profiles</strong> to support
-            decision-making without default labels.
-        </p>
+            <strong>ROC-AUC ≈ 0.75</strong> predicting default, with every decision traceable to
+            <strong>SHAP-ranked features</strong> in a live approve/reject dashboard.
+          </p>
 
           <div class="projectMeta">
             <span class="pill">Python</span>
-            <span class="pill">pandas / NumPy</span>
-            <span class="pill">scikit-learn</span>
-            <span class="pill">K-Means</span>
-            <span class="pill">PCA</span>
+            <span class="pill">XGBoost</span>
+            <span class="pill">SHAP</span>
+            <span class="pill">Streamlit</span>
           </div>
 
           <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/Credit-Risk-Segmentation" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="linkBtn" href="https://github.com/doppy-bot/Credit_Risk_Decision_System" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
         <div class="projectMedia">
           <div class="mediaFrame">
-            <!-- Optional: you can replace with your own screenshot -->
             <img
-              src="https://raw.githubusercontent.com/doppy-bot/Credit-Risk-Segmentation/main/Clusters.png"
-              alt="Credit risk clustering visual"
+              src="assets/images/credit-risk-decision-shap.png"
+              alt="SHAP summary plot showing which features drive the credit risk model's default predictions"
               loading="lazy"
             />
           </div>
@@ -143,41 +168,40 @@
       <!-- Project 2 -->
       <article class="projectBlock revealProject" data-parallax>
         <div class="projectText">
-          <p class="projectKicker">Fairness • Responsible AI</p>
-          <h3 class="projectTitle">Fairness & Bias in Income Prediction</h3>
+          <p class="projectKicker">Analytics Engineering • Experimentation</p>
+          <h3 class="projectTitle">Payment Analytics — Fraud-Check A/B Test Pipeline</h3>
 
           <p class="projectDesc">
-            <strong>Problem:</strong> Accuracy alone can hide harm — evaluated whether an income model treats demographic groups differently.
+            <strong>Problem:</strong> A payments company rolled out a new fraud-check flow to 50% of customers — did it actually cut fraud, and did it cost too many good payments along the way?
             <br><br>
-            <strong>Approach:</strong> Built a baseline Logistic Regression model and evaluated fairness using
-            <em>Demographic Parity</em>, <em>Disparate Impact Ratio</em>, and <em>Equal Opportunity</em>.
-            Then ran an intersectional analysis (Gender × Race).
+            <strong>Approach:</strong> Built a tested, version-controlled <strong>dbt</strong> warehouse (staging → dimensional marts) over 120K transactions on DuckDB,
+            with 24 passing data tests, then ran proper two-proportion z-tests with confidence intervals and a guardrail metric.
             <br><br>
-            <strong>Key finding:</strong> Observed unequal selection rates and differing true positive rates across groups, with compounded disadvantage in intersectional slices.
+            <strong>Outcome:</strong> A dashboard framing the result as a business trade-off rather than an automatic ship decision.
           </p>
           <p class="impactLine">
-  <span>Key Finding</span>
-  Identified <strong>unequal selection rates</strong> across demographic groups using
-  parity and equal-opportunity metrics.
-</p>
+            <span>Result</span>
+            Cut approved-transaction fraud by <strong>46% relative</strong> (z=−10.4, p&lt;0.001) — against a
+            <strong>2.95-point drop</strong> in approval rate the business had to weigh.
+          </p>
 
           <div class="projectMeta">
-            <span class="pill">Python</span>
-            <span class="pill">Logistic Regression</span>
-            <span class="pill">Fairness Metrics</span>
-            <span class="pill">Intersectional Analysis</span>
+            <span class="pill">dbt</span>
+            <span class="pill">DuckDB</span>
+            <span class="pill">SQL</span>
+            <span class="pill">Python (SciPy)</span>
           </div>
 
           <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/Fairness-Bias-Income-Prediction" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="linkBtn" href="https://github.com/doppy-bot/payment-analytics" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
         <div class="projectMedia">
           <div class="mediaFrame">
             <img
-              src="https://raw.githubusercontent.com/doppy-bot/Fairness-Bias-Income-Prediction/main/intersectional_income_heatmap.png"
-              alt="Intersectional fairness heatmap"
+              src="assets/images/payment-analytics-dashboard.png"
+              alt="Fraud-check A/B test dashboard showing KPI cards and experiment verdict"
               loading="lazy"
             />
           </div>
@@ -185,6 +209,49 @@
       </article>
 
       <!-- Project 3 -->
+      <article class="projectBlock revealProject" data-parallax>
+        <div class="projectText">
+          <p class="projectKicker">GenAI • LLM Application</p>
+          <h3 class="projectTitle">RAG Finance Assistant (LangChain + LLaMA 3.2)</h3>
+
+          <p class="projectDesc">
+            <strong>Problem:</strong> Asking an LLM to recall project details from training data invites vague, unsourced answers.
+            <br><br>
+            <strong>Approach:</strong> Built a fully local retrieval-augmented generation pipeline — a FAISS vector store over four project documents,
+            a prompt builder that injects the retrieved context, and generation via LLaMA 3.2 through Ollama. Zero cloud dependency, zero API cost.
+            <br><br>
+            <strong>Outcome:</strong> Every answer traces back to a real source document — the same retrieve → augment → generate pattern used in conversational analytics tools.
+          </p>
+          <p class="impactLine">
+            <span>Design</span>
+            Fully local RAG pipeline — <strong>grounded, source-cited answers</strong> with
+            <strong>no hallucination</strong> and no API bill.
+          </p>
+
+          <div class="projectMeta">
+            <span class="pill">LangChain</span>
+            <span class="pill">FAISS</span>
+            <span class="pill">Ollama / LLaMA 3.2</span>
+            <span class="pill">Streamlit</span>
+          </div>
+
+          <div class="projectLinks">
+            <a class="linkBtn" href="https://github.com/doppy-bot/rag-finance-assistant" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="projectMedia">
+          <div class="mediaFrame">
+            <img
+              src="assets/images/rag-architecture.svg"
+              alt="RAG pipeline architecture diagram: question, FAISS retrieval, prompt builder, LLaMA generation, grounded answer"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
       <article class="projectBlock revealProject" data-parallax>
         <div class="projectText">
           <p class="projectKicker">Forecasting • Simulation</p>
@@ -232,71 +299,43 @@
 <!-- MORE PROJECTS -->
 <section id="more-projects" class="section moreProjects reveal">
   <div class="sectionInner">
-    <span class="sectionLabel">More Projects</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>More Projects</span>
 
     <h2 class="sectionTitle">
-      Additional work — experiments, dashboards, and modelling.
+      Additional work — earlier models and responsible-AI experiments.
     </h2>
 
     <div class="moreGrid">
       <article class="moreCard">
         <div class="moreTop">
-          <h3>Click-Fraud Detection (AdTech)</h3>
-          <span class="miniTag">ML Pipeline</span>
+          <h3>Credit Risk Segmentation (EDA + K-Means)</h3>
+          <span class="miniTag">Unsupervised Learning</span>
         </div>
         <p>
-          Built an end-to-end fraud detection pipeline with feature engineering and model comparison
-          (Logistic Regression, SVM, Random Forest) using precision/recall for risk-based decisions.
+          Earlier pass at the same problem, without a labelled default target: cleaned and explored a 51,336-customer
+          Kaggle dataset, built a K-Means model (k=4), and visualised clusters with PCA to segment customers into
+          Low / Medium / High / No Credit History risk bands.
         </p>
         <div class="moreMeta">
-          <span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">Precision/Recall</span>
+          <span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">K-Means</span><span class="pill">PCA</span>
         </div>
-        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="linkBtn small" href="https://github.com/doppy-bot/Credit-Risk-Segmentation" target="_blank" rel="noreferrer">GitHub</a>
       </article>
 
       <article class="moreCard">
         <div class="moreTop">
-          <h3>Market Analysis & Forecasting (S&P 500)</h3>
-          <span class="miniTag">Forecasting</span>
-        </div>
-        <p>
-          Analysed historical market data to identify trends and volatility patterns, then built baseline
-          forecasting models (Linear Regression, Random Forest) and evaluated performance with RMSE and R².
-        </p>
-        <div class="moreMeta">
-          <span class="pill">Python</span><span class="pill">EDA</span><span class="pill">RMSE/R²</span>
-        </div>
-        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
-      </article>
-
-      <article class="moreCard">
-        <div class="moreTop">
-          <h3>Marketing KPI Dashboard</h3>
-          <span class="miniTag">BI</span>
-        </div>
-        <p>
-          Designed a self-serve dashboard to monitor conversion rates, revenue trends, and segmentation.
-          Automated reporting workflows to reduce manual work by ~25%.
-        </p>
-        <div class="moreMeta">
-          <span class="pill">Power BI</span><span class="pill">Excel</span><span class="pill">Dashboards</span>
-        </div>
-        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">Preview</a>
-      </article>
-
-      <article class="moreCard">
-        <div class="moreTop">
-          <h3>Data Ethics: Bias Analysis</h3>
+          <h3>Fairness &amp; Bias in Income Prediction</h3>
           <span class="miniTag">Responsible AI</span>
         </div>
         <p>
-          Assessed demographic disparities using fairness metrics (Demographic Parity, Disparate Impact,
-          Equal Opportunity) and documented ethical implications for non-technical stakeholders.
+          Evaluated whether a Logistic Regression income model treats demographic groups differently, using
+          Demographic Parity, Disparate Impact Ratio, and Equal Opportunity — then ran an intersectional
+          analysis (gender × race) that surfaced compounded disadvantage in some subgroups.
         </p>
         <div class="moreMeta">
-          <span class="pill">Fairness</span><span class="pill">Metrics</span><span class="pill">Documentation</span>
+          <span class="pill">Python</span><span class="pill">Logistic Regression</span><span class="pill">Fairness Metrics</span>
         </div>
-        <a class="linkBtn small" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="linkBtn small" href="https://github.com/doppy-bot/Fairness-Bias-Income-Prediction" target="_blank" rel="noreferrer">GitHub</a>
       </article>
     </div>
   </div>
@@ -304,7 +343,7 @@
 <!-- HIGHLIGHTS -->
 <section class="section highlights reveal" aria-label="Highlights">
   <div class="sectionInner">
-    <span class="sectionLabel">Highlights</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Highlights</span>
 
     <div class="highGrid">
       <div class="highItem">
@@ -318,8 +357,8 @@
       </div>
 
       <div class="highItem">
-        <div class="highNum">25%</div>
-        <div class="highLabel">Reporting time reduced</div>
+        <div class="highNum">46%</div>
+        <div class="highLabel">Fraud reduction (A/B tested)</div>
       </div>
     </div>
   </div>
@@ -329,7 +368,7 @@
 <section id="skills" class="section skillsEditorial reveal">
   <div class="sectionInner skillsWrap">
 
-    <span class="sectionLabel">Skills</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Skills</span>
 
     <div class="skillsGrid">
       <!-- LEFT: BIG TYPE CATEGORIES -->
@@ -368,7 +407,7 @@
 <!-- CONTACT -->
 <section id="contact" class="section contactSection reveal">
   <div class="sectionInner contactInner">
-    <span class="sectionLabel">Contact</span>
+    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Contact</span>
 
     <h2 class="contactTitle">
       Let’s build something useful with data.
