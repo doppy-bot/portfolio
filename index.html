@@ -1,446 +1,693 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarun Jena — Portfolio</title>
-  <meta name="description" content="Tarun Jena — Data Analyst & Business Analytics portfolio." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarun Jena — Data & Business Analyst</title>
+<meta name="description" content="Portfolio of Tarun Jena — Data Analyst / Business Analyst, MSc Business Analytics & Decision Science, University of Leeds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b10;
+    --bg-2:#0f1118;
+    --glass:rgba(255,255,255,0.04);
+    --glass-hi:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.09);
+    --border-hi:rgba(255,255,255,0.2);
+    --text:#e9eaef;
+    --text-dim:#9497a6;
+    --text-faint:#5c5f6e;
+    --teal:#35d5c3;
+    --violet:#8b6df2;
+    --teal-glow:rgba(53,213,195,0.35);
+    --violet-glow:rgba(139,109,242,0.35);
+    --radius:18px;
+    --mono:'Space Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  h1,h2,h3,.display,.mono{
+    font-family:var(--mono);
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--teal);color:#000;}
 
-  <!-- Font (clean editorial) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+  }
 
-  <link rel="stylesheet" href="style.css" />
+  /* ---------- custom cursor ---------- */
+  @media (hover:hover) and (pointer:fine){
+    body{cursor:none;}
+    a,button{cursor:none;}
+  }
+  .cursor-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--teal);
+    position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);display:none;
+  }
+  .cursor-ring{
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--border-hi);
+    position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
+    transform:translate(-50%,-50%);display:none;
+    transition:width .2s ease,height .2s ease,border-color .2s ease,background .2s ease;
+  }
+  .cursor-ring.hover{width:56px;height:56px;border-color:var(--teal);background:rgba(53,213,195,0.08);}
+  @media (hover:hover) and (pointer:fine){.cursor-dot,.cursor-ring{display:block;}}
+
+  /* ---------- background field ---------- */
+  .bg-field{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(ellipse 900px 600px at 15% 10%, rgba(53,213,195,0.09), transparent 60%),
+      radial-gradient(ellipse 800px 700px at 85% 30%, rgba(139,109,242,0.09), transparent 60%),
+      radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px);
+    background-size:auto,auto,26px 26px;
+    background-color:var(--bg);
+  }
+  .orb{
+    position:fixed;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;
+    transition:transform 0.4s cubic-bezier(.2,.7,.2,1);opacity:0.4;
+  }
+  .orb-1{width:420px;height:420px;background:var(--teal-glow);top:-10%;left:-8%;}
+  .orb-2{width:380px;height:380px;background:var(--violet-glow);top:20%;right:-10%;}
+  .orb-3{width:300px;height:300px;background:var(--violet-glow);bottom:5%;left:20%;opacity:0.22;}
+
+  /* ---------- scroll progress ---------- */
+  .scroll-progress{
+    position:fixed;left:28px;top:0;bottom:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;z-index:40;pointer-events:none;gap:14px;
+  }
+  .scroll-progress .track{width:1px;height:130px;background:var(--border);position:relative;overflow:hidden;}
+  .scroll-progress .fill{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--teal);}
+  .scroll-progress .pct{font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);letter-spacing:0.05em;}
+  @media (max-width:960px){.scroll-progress{display:none;}}
+
+  /* ---------- layout shell ---------- */
+  .wrap{position:relative;z-index:2;}
+  section{padding:min(14vw,140px) 8vw;position:relative;}
+  .section-inner{max-width:1180px;margin:0 auto;}
+  @media (min-width:961px){section{padding-left:calc(8vw + 20px);}}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 8vw;
+    backdrop-filter:blur(16px);
+    background:rgba(10,11,16,0.55);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.3s ease, background 0.3s ease;
+  }
+  nav.scrolled{border-color:var(--border);background:rgba(10,11,16,0.85);}
+  .logo{font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:-0.02em;}
+  .logo span{color:var(--teal);}
+  .nav-links{display:flex;gap:34px;}
+  .nav-links a{font-size:0.85rem;font-family:var(--mono);color:var(--text-dim);transition:color 0.25s ease;position:relative;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;
+    background:var(--teal);transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  @media (max-width:760px){.nav-links{display:none;}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding-top:110px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;width:100%;}
+  @media (max-width:960px){.hero-grid{grid-template-columns:1fr;}}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:0.8rem;color:var(--text-dim);margin-bottom:26px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  #typedRole::after{content:'';display:inline-block;width:7px;height:1em;background:var(--teal);margin-left:3px;vertical-align:-2px;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero h1{
+    font-size:clamp(2.1rem,4.6vw,3.6rem);
+    line-height:1.12;
+  }
+  .hero h1 .grad{
+    position:relative;color:var(--teal);
+    text-shadow:-2px 0 rgba(139,109,242,0.7), 2px 0 rgba(53,213,195,0.35);
+  }
+  .hero-sub{
+    margin-top:26px;font-size:1.1rem;color:var(--text-dim);max-width:52ch;
+  }
+  .hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 26px;border-radius:100px;font-size:0.9rem;font-family:var(--mono);font-weight:700;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease;
+    will-change:transform;
+  }
+  .btn-primary{background:var(--teal);color:#07080b;}
+  .btn-primary:hover{box-shadow:0 12px 30px -8px var(--teal-glow);background:#4fe3d2;}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:var(--glass);}
+  .btn-ghost:hover{border-color:var(--border-hi);}
+
+  .hero-meta{margin-top:80px;display:flex;gap:52px;flex-wrap:wrap;}
+  .hero-meta div{border-left:1px solid var(--border);padding-left:16px;}
+  .hero-meta .num{font-family:var(--mono);font-size:1.6rem;font-weight:700;}
+  .hero-meta .lbl{font-size:0.8rem;color:var(--text-faint);margin-top:3px;font-family:var(--mono);}
+
+  /* ---------- hero visual (network panel) ---------- */
+  .hero-visual{
+    position:relative;border:1px solid var(--border);border-radius:24px;
+    background:var(--glass);overflow:hidden;aspect-ratio:1/1.05;
+  }
+  .hero-visual canvas{position:absolute;inset:0;width:100%;height:100%;}
+  .hero-visual .tag{
+    position:absolute;top:18px;left:18px;font-family:var(--mono);font-size:0.7rem;
+    color:var(--text-faint);letter-spacing:0.08em;z-index:2;
+  }
+  .hero-visual .tag2{
+    position:absolute;bottom:18px;right:18px;font-family:var(--mono);font-size:0.7rem;
+    color:var(--text-faint);letter-spacing:0.08em;z-index:2;text-align:right;
+  }
+  @media (max-width:960px){.hero-visual{aspect-ratio:16/10;}}
+
+  /* ---------- marquee ---------- */
+  .marquee-wrap{
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:28px 0;overflow:hidden;background:var(--glass);
+  }
+  .marquee-track{display:flex;width:max-content;animation:scroll-left 32s linear infinite;}
+  .marquee-track:hover{animation-play-state:paused;}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marquee-track span{
+    font-family:var(--mono);font-size:1rem;color:var(--text-faint);
+    padding:0 32px;white-space:nowrap;display:flex;align-items:center;gap:32px;
+  }
+  .marquee-track span::after{content:'✦';color:var(--teal);font-size:0.8rem;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- section headers ---------- */
+  .sec-head{max-width:640px;margin-bottom:64px;}
+  .sec-head .tag{font-family:var(--mono);font-size:0.8rem;color:var(--teal);margin-bottom:14px;display:block;}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.4rem);}
+  .sec-head p{color:var(--text-dim);margin-top:16px;font-size:1.05rem;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;}
+  .about-grid p{color:var(--text-dim);font-size:1.05rem;margin-bottom:18px;}
+  .about-grid p strong{color:var(--text);font-weight:500;}
+  .about-facts{display:flex;flex-direction:column;gap:0;}
+  .fact{padding:20px 0;border-top:1px solid var(--border);}
+  .fact:last-child{border-bottom:1px solid var(--border);}
+  .fact .k{font-family:var(--mono);font-size:0.75rem;color:var(--text-faint);margin-bottom:6px;}
+  .fact .v{font-size:1rem;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- projects ---------- */
+  .projects{display:flex;flex-direction:column;gap:22px;}
+  .proj-card{
+    position:relative;border:1px solid var(--border);border-radius:var(--radius);
+    padding:40px;background:var(--glass);overflow:hidden;
+    display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;
+    transition:border-color 0.3s ease, background 0.3s ease;
+    transform-style:preserve-3d;will-change:transform;
+  }
+  .proj-card::before{
+    content:'';position:absolute;inset:0;opacity:0;
+    background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%), rgba(53,213,195,0.10), transparent 60%);
+    transition:opacity 0.4s ease;pointer-events:none;
+  }
+  .proj-card:hover::before{opacity:1;}
+  .proj-card:hover{border-color:var(--border-hi);background:var(--glass-hi);}
+  .proj-index{font-family:var(--mono);font-size:0.85rem;color:var(--text-faint);writing-mode:vertical-rl;}
+  .proj-body h3{font-family:var(--mono);font-size:1.25rem;margin-bottom:10px;}
+  .proj-body p{color:var(--text-dim);font-size:0.98rem;max-width:56ch;}
+  .proj-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+  .proj-tags span{
+    font-family:var(--mono);font-size:0.72rem;padding:5px 12px;border-radius:100px;
+    border:1px solid var(--border);color:var(--text-dim);
+  }
+  .proj-arrow{
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    transition:background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+  .proj-card:hover .proj-arrow{background:var(--teal);border-color:var(--teal);transform:rotate(45deg);}
+  .proj-arrow svg{stroke:var(--text);transition:stroke 0.3s ease;}
+  .proj-card:hover .proj-arrow svg{stroke:#07080b;}
+  @media (max-width:760px){
+    .proj-card{grid-template-columns:1fr;padding:28px;transform:none !important;}
+    .proj-index{writing-mode:horizontal-tb;}
+    .proj-arrow{display:none;}
+  }
+
+  /* ---------- stats ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  }
+  .stat{background:var(--bg-2);padding:38px 28px;}
+  .stat .num{
+    font-family:var(--mono);font-size:clamp(1.8rem,3.2vw,2.5rem);
+    color:var(--teal);
+  }
+  .stat .lbl{color:var(--text-dim);font-size:0.85rem;margin-top:8px;font-family:var(--mono);}
+  @media (max-width:760px){.stats{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .skill-card{
+    border:1px solid var(--border);border-radius:14px;padding:26px;background:var(--glass);
+    transition:border-color 0.3s ease, transform 0.3s ease;
+  }
+  .skill-card:hover{border-color:var(--border-hi);transform:translateY(-3px);}
+  .skill-card h4{font-family:var(--mono);font-size:0.9rem;color:var(--teal);margin-bottom:12px;font-weight:700;}
+  .skill-card p{color:var(--text-dim);font-size:0.92rem;}
+  @media (max-width:860px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---------- contact ---------- */
+  .contact-box{
+    border:1px solid var(--border);border-radius:24px;padding:min(8vw,80px);
+    text-align:center;background:var(--glass);position:relative;overflow:hidden;
+  }
+  .contact-box h2{font-size:clamp(1.7rem,3.8vw,2.6rem);max-width:16ch;margin:0 auto 20px;}
+  .contact-box p{color:var(--text-dim);max-width:44ch;margin:0 auto 36px;}
+  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  footer{
+    padding:36px 8vw;display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid var(--border);color:var(--text-faint);font-size:0.8rem;font-family:var(--mono);flex-wrap:wrap;gap:12px;
+  }
+</style>
 </head>
-
 <body>
-    <div class="progress" id="progress"></div>
 
-    <!-- Ambient floating glass orbs — signature motif (data points clustering) -->
-    <div class="orbField" aria-hidden="true">
-      <div class="orb"></div>
-      <div class="orb violet"></div>
-      <div class="orb"></div>
-      <div class="orb violet"></div>
-      <div class="orb"></div>
-      <div class="orb violet"></div>
-    </div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Minimal top nav -->
-  <header class="nav">
-    <a class="brand" href="#top">Tarun Jena</a>
+<div class="bg-field"></div>
+<div class="orb orb-1" id="orb1"></div>
+<div class="orb orb-2" id="orb2"></div>
+<div class="orb orb-3" id="orb3"></div>
 
-    <nav class="navLinks" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<div class="scroll-progress">
+  <div class="track"><div class="fill" id="scrollFill"></div></div>
+  <div class="pct" id="scrollPct">000%</div>
+</div>
 
-    <div class="navActions">
-      <a class="navCV" href="assets/cv/Tarun_jena_cv.pdf" target="_blank" rel="noopener">Résumé</a>
-      <button class="menuBtn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
-        ☰
-      </button>
-    </div>
-  </header>
-
-  <!-- Fullscreen menu (we’ll wire it up next) -->
-  <nav id="menu" class="menu" aria-hidden="true">
-    <button class="menuClose" type="button" aria-label="Close menu">✕</button>
-    <div class="menuLinks">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <a href="assets/cv/Tarun_jena_cv.pdf" class="menuCV" target="_blank" rel="noopener">
-  Download CV
-</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <main id="top" class="hero">
-    <div class="heroOrbs" aria-hidden="true">
-      <div class="orb"></div>
-      <div class="orb violet"></div>
-      <div class="orb"></div>
-      <div class="orb violet"></div>
-    </div>
-    <div class="heroInner">
-      <h1 class="heroName">
-        Tarun<br />
-        Jena
-      </h1>
-
-      <p class="heroSub">
-        Data Analyst & Business Analytics Graduate — SQL · Python · Power BI
-      </p>
-    </div>
-     <div class="heroAside" aria-hidden="true">
-    <span>DATA · ANALYTICS · DECISIONS</span>
+<nav id="nav">
+  <div class="logo">tarun<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#work">work</a>
+    <a href="#skills">skills</a>
+    <a href="#contact">contact</a>
   </div>
+  <a href="#contact" class="btn btn-ghost" style="padding:10px 20px;font-size:0.78rem;">get in touch</a>
+</nav>
 
-    <div class="scrollHint" aria-hidden="true">
-      <span class="scrollDot"></span>
-      <span>scroll</span>
-    </div>
-  </main>
-  <!-- ABOUT -->
-<section id="about" class="section about reveal">
-  <div class="sectionInner">
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>About</span>
+<div class="wrap">
 
-    <h2 class="sectionTitle">
-      I’m a data analyst with a computer science foundation,
-      focused on turning complex data into clear,
-      decision-ready insights.
-    </h2>
-
-    <div class="aboutGrid">
-      <p>
-        Currently pursuing an MSc in <strong>Business Analytics & Decision Science</strong>
-        at the University of Leeds, I work across marketing analytics, KPI design,
-        experimentation concepts, and dashboard development.
-      </p>
-
-      <p>
-        I enjoy working at the intersection of <strong>data, business, and communication</strong> —
-        using SQL, Python, and BI tools to support better decisions in fast-paced environments.
-      </p>
-    </div>
-  </div>
-</section>
-<!-- PROJECTS -->
-<section id="projects" class="section projects">
-  <div class="sectionInner">
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Projects</span>
-
-    <h2 class="sectionTitle">
-      Selected work — modelling, experimentation, and decision-focused analytics.
-    </h2>
-
-    <div class="projectsWrap">
-      <!-- Project 1 -->
-      <article class="projectBlock revealProject" data-parallax>
-        <div class="projectText">
-          <p class="projectKicker">Credit Risk • Explainable AI</p>
-          <h3 class="projectTitle">Credit Risk Decision System (XGBoost + SHAP)</h3>
-
-          <p class="projectDesc">
-            <strong>Problem:</strong> A default-risk model is only useful if a credit team can trust and act on it — a black-box score isn't enough.
-            <br><br>
-            <strong>Approach:</strong> Engineered features from credit bureau data, trained an XGBoost model to predict Probability of Default,
-            and wrapped it in a business decision engine (Approve / Reject) with SHAP-based explainability behind every call.
-            <br><br>
-            <strong>Outcome:</strong> Shipped as an interactive Streamlit dashboard, so a reviewer sees not just the decision but <em>why</em> — which features pushed a case toward approval or rejection.
-          </p>
-          <p class="impactLine">
-            <span>Impact</span>
-            <strong>ROC-AUC ≈ 0.75</strong> predicting default, with every decision traceable to
-            <strong>SHAP-ranked features</strong> in a live approve/reject dashboard.
-          </p>
-
-          <div class="projectMeta">
-            <span class="pill">Python</span>
-            <span class="pill">XGBoost</span>
-            <span class="pill">SHAP</span>
-            <span class="pill">Streamlit</span>
+  <section class="hero">
+    <div class="section-inner" style="width:100%;">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span><span id="typedRole">Data Analyst</span></div>
+          <h1>Turning messy data into <span class="grad">decisions</span> people actually trust.</h1>
+          <p class="hero-sub">I'm Tarun Jena — an MSc Business Analytics & Decision Science student at the University of Leeds, building analytics systems for credit risk, payments, and sports forecasting.</p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary magnetic">view my work</a>
+            <a href="mailto:tarunjena2001@gmail.com" class="btn btn-ghost magnetic">say hello</a>
           </div>
-
-          <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/Credit_Risk_Decision_System" target="_blank" rel="noreferrer">GitHub</a>
+          <div class="hero-meta">
+            <div><div class="num">4</div><div class="lbl">shipped projects</div></div>
+            <div><div class="num">120K+</div><div class="lbl">rows modelled</div></div>
+            <div><div class="num">46%</div><div class="lbl">fraud reduction</div></div>
           </div>
         </div>
-
-        <div class="projectMedia">
-          <div class="mediaFrame">
-            <img
-              src="assets/images/credit-risk-decision-shap.png"
-              alt="SHAP summary plot showing which features drive the credit risk model's default predictions"
-              loading="lazy"
-            />
-          </div>
+        <div class="hero-visual">
+          <span class="tag">// data.network</span>
+          <span class="tag2">nodes: live</span>
+          <canvas id="netCanvas"></canvas>
         </div>
-      </article>
-
-      <!-- Project 2 -->
-      <article class="projectBlock revealProject" data-parallax>
-        <div class="projectText">
-          <p class="projectKicker">Analytics Engineering • Experimentation</p>
-          <h3 class="projectTitle">Payment Analytics — Fraud-Check A/B Test Pipeline</h3>
-
-          <p class="projectDesc">
-            <strong>Problem:</strong> A payments company rolled out a new fraud-check flow to 50% of customers — did it actually cut fraud, and did it cost too many good payments along the way?
-            <br><br>
-            <strong>Approach:</strong> Built a tested, version-controlled <strong>dbt</strong> warehouse (staging → dimensional marts) over 120K transactions on DuckDB,
-            with 24 passing data tests, then ran proper two-proportion z-tests with confidence intervals and a guardrail metric.
-            <br><br>
-            <strong>Outcome:</strong> A dashboard framing the result as a business trade-off rather than an automatic ship decision.
-          </p>
-          <p class="impactLine">
-            <span>Result</span>
-            Cut approved-transaction fraud by <strong>46% relative</strong> (z=−10.4, p&lt;0.001) — against a
-            <strong>2.95-point drop</strong> in approval rate the business had to weigh.
-          </p>
-
-          <div class="projectMeta">
-            <span class="pill">dbt</span>
-            <span class="pill">DuckDB</span>
-            <span class="pill">SQL</span>
-            <span class="pill">Python (SciPy)</span>
-          </div>
-
-          <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/payment-analytics" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </div>
-
-        <div class="projectMedia">
-          <div class="mediaFrame">
-            <img
-              src="assets/images/payment-analytics-dashboard.png"
-              alt="Fraud-check A/B test dashboard showing KPI cards and experiment verdict"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 3 -->
-      <article class="projectBlock revealProject" data-parallax>
-        <div class="projectText">
-          <p class="projectKicker">GenAI • LLM Application</p>
-          <h3 class="projectTitle">RAG Finance Assistant (LangChain + LLaMA 3.2)</h3>
-
-          <p class="projectDesc">
-            <strong>Problem:</strong> Asking an LLM to recall project details from training data invites vague, unsourced answers.
-            <br><br>
-            <strong>Approach:</strong> Built a fully local retrieval-augmented generation pipeline — a FAISS vector store over four project documents,
-            a prompt builder that injects the retrieved context, and generation via LLaMA 3.2 through Ollama. Zero cloud dependency, zero API cost.
-            <br><br>
-            <strong>Outcome:</strong> Every answer traces back to a real source document — the same retrieve → augment → generate pattern used in conversational analytics tools.
-          </p>
-          <p class="impactLine">
-            <span>Design</span>
-            Fully local RAG pipeline — <strong>grounded, source-cited answers</strong> with
-            <strong>no hallucination</strong> and no API bill.
-          </p>
-
-          <div class="projectMeta">
-            <span class="pill">LangChain</span>
-            <span class="pill">FAISS</span>
-            <span class="pill">Ollama / LLaMA 3.2</span>
-            <span class="pill">Streamlit</span>
-          </div>
-
-          <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/rag-finance-assistant" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </div>
-
-        <div class="projectMedia">
-          <div class="mediaFrame">
-            <img
-              src="assets/images/rag-architecture.svg"
-              alt="RAG pipeline architecture diagram: question, FAISS retrieval, prompt builder, LLaMA generation, grounded answer"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 4 -->
-      <article class="projectBlock revealProject" data-parallax>
-        <div class="projectText">
-          <p class="projectKicker">Forecasting • Simulation</p>
-          <h3 class="projectTitle">Premier League Table Prediction (API + Monte Carlo)</h3>
-
-          <p class="projectDesc">
-            <strong>Problem:</strong> Forecast end-of-season outcomes using match history + remaining fixtures.
-            <br><br>
-            <strong>Approach:</strong> Pulled match data via football-data.org API, engineered rolling performance features,
-            trained a Random Forest classifier for match outcome probabilities, then ran a Monte Carlo simulation (5,000 runs).
-            <br><br>
-            <strong>Output:</strong> Title / Top-4 / Relegation probabilities + scenario-based visualisations.
-          </p>
-          <p class="impactLine">
-  <span>Output</span>
-  Generated <strong>Top-4 and relegation probabilities</strong> using
-  <strong>5,000 Monte Carlo simulations</strong>.
-</p>
-
-          <div class="projectMeta">
-            <span class="pill">Python</span>
-            <span class="pill">Random Forest</span>
-            <span class="pill">Feature Engineering</span>
-            <span class="pill">Monte Carlo (5,000)</span>
-          </div>
-
-          <div class="projectLinks">
-            <a class="linkBtn" href="https://github.com/doppy-bot/Premier_League_Prediction-using-API-" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </div>
-
-        <div class="projectMedia">
-          <div class="mediaFrame">
-            <img
-              src="https://raw.githubusercontent.com/doppy-bot/Premier_League_Prediction-using-API-/main/Top%204.png"
-              alt="Premier League Top 4 probability"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-<!-- MORE PROJECTS -->
-<section id="more-projects" class="section moreProjects reveal">
-  <div class="sectionInner">
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>More Projects</span>
-
-    <h2 class="sectionTitle">
-      Additional work — earlier models and responsible-AI experiments.
-    </h2>
-
-    <div class="moreGrid">
-      <article class="moreCard">
-        <div class="moreTop">
-          <h3>Credit Risk Segmentation (EDA + K-Means)</h3>
-          <span class="miniTag">Unsupervised Learning</span>
-        </div>
-        <p>
-          Earlier pass at the same problem, without a labelled default target: cleaned and explored a 51,336-customer
-          Kaggle dataset, built a K-Means model (k=4), and visualised clusters with PCA to segment customers into
-          Low / Medium / High / No Credit History risk bands.
-        </p>
-        <div class="moreMeta">
-          <span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">K-Means</span><span class="pill">PCA</span>
-        </div>
-        <a class="linkBtn small" href="https://github.com/doppy-bot/Credit-Risk-Segmentation" target="_blank" rel="noreferrer">GitHub</a>
-      </article>
-
-      <article class="moreCard">
-        <div class="moreTop">
-          <h3>Fairness &amp; Bias in Income Prediction</h3>
-          <span class="miniTag">Responsible AI</span>
-        </div>
-        <p>
-          Evaluated whether a Logistic Regression income model treats demographic groups differently, using
-          Demographic Parity, Disparate Impact Ratio, and Equal Opportunity — then ran an intersectional
-          analysis (gender × race) that surfaced compounded disadvantage in some subgroups.
-        </p>
-        <div class="moreMeta">
-          <span class="pill">Python</span><span class="pill">Logistic Regression</span><span class="pill">Fairness Metrics</span>
-        </div>
-        <a class="linkBtn small" href="https://github.com/doppy-bot/Fairness-Bias-Income-Prediction" target="_blank" rel="noreferrer">GitHub</a>
-      </article>
-    </div>
-  </div>
-</section>
-<!-- HIGHLIGHTS -->
-<section class="section highlights reveal" aria-label="Highlights">
-  <div class="sectionInner">
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Highlights</span>
-
-    <div class="highGrid">
-      <div class="highItem">
-        <div class="highNum">51k+</div>
-        <div class="highLabel">Records analysed</div>
-      </div>
-
-      <div class="highItem">
-        <div class="highNum">5,000</div>
-        <div class="highLabel">Monte Carlo simulations</div>
-      </div>
-
-      <div class="highItem">
-        <div class="highNum">46%</div>
-        <div class="highLabel">Fraud reduction (A/B tested)</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS (Editorial typography style) -->
-<section id="skills" class="section skillsEditorial reveal">
-  <div class="sectionInner skillsWrap">
-
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Skills</span>
-
-    <div class="skillsGrid">
-      <!-- LEFT: BIG TYPE CATEGORIES -->
-      <ul class="skillsCategories" id="skillCats">
-        <li class="skillCat is-active" data-cat="analytics">
-          Analytics
-        </li>
-        <li class="skillCat" data-cat="experimentation">
-          Experimentation
-        </li>
-        <li class="skillCat" data-cat="programming">
-          Programming
-        </li>
-        <li class="skillCat" data-cat="bi">
-          BI & Visualisation
-        </li>
-        <li class="skillCat" data-cat="tools">
-          Libraries & Tools
-        </li>
-        <li class="skillCat" data-cat="ethics">
-          Data Ethics
-        </li>
-      </ul>
-
-      <!-- RIGHT: EDITORIAL DETAIL -->
-      <aside class="skillsDetail" id="skillsPanel">
-        <h3 class="skillsTitle" id="panelTitle">Analytics</h3>
-        <p class="skillsDesc" id="panelDesc"></p>
-
-        <div class="skillsInline" id="panelPills"></div>
-      </aside>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee">
+      <span>Python</span><span>SQL</span><span>R</span><span>Power BI</span><span>Tableau</span>
+      <span>scikit-learn</span><span>XGBoost</span><span>SHAP</span><span>dbt</span><span>DuckDB</span>
+      <span>PySpark</span><span>LangChain</span><span>Git</span>
+      <span>Python</span><span>SQL</span><span>R</span><span>Power BI</span><span>Tableau</span>
+      <span>scikit-learn</span><span>XGBoost</span><span>SHAP</span><span>dbt</span><span>DuckDB</span>
+      <span>PySpark</span><span>LangChain</span><span>Git</span>
     </div>
-
   </div>
-</section>
-<!-- CONTACT -->
-<section id="contact" class="section contactSection reveal">
-  <div class="sectionInner contactInner">
-    <span class="sectionLabel"><span class="labelDots" aria-hidden="true"><span></span><span></span><span></span></span>Contact</span>
 
-    <h2 class="contactTitle">
-      Let’s build something useful with data.
-    </h2>
-
-    <p class="contactText">
-      If you’re hiring for analytics roles (Marketing / BI / Product), I’d love to talk.
-      The fastest way to reach me is email.
-    </p>
-
-    <div class="contactLinks">
-      <a class="contactBtn" href="mailto:tarunjena2001@gmail.com">Email</a>
-      <a class="contactBtn ghost" href="https://www.linkedin.com/in/tarun-jena07/" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a class="contactBtn ghost" href="https://github.com/doppy-bot" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-
-    <!-- Optional: minimal form (sends via mailto; simple) -->
-    <form class="contactForm" action="mailto:tarunjena2001@gmail.com" method="post" enctype="text/plain">
-      <div class="formRow">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="reveal">
+          <span class="sec-head tag" style="display:block;margin-bottom:14px;">// about</span>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:24px;">From Rourkela to Leeds, via a B.Tech in Computer Science.</h2>
+          <p>I grew up in <strong>Rourkela, Odisha</strong>, studied Computer Science at SOA University, and I'm now finishing my <strong>MSc in Business Analytics and Decision Science</strong> at the University of Leeds.</p>
+          <p>I care less about building the fanciest model and more about whether the analysis actually changes a decision — which is why my strongest work sits at the intersection of <strong>statistics, business context, and clean pipelines</strong> rather than pure ML novelty.</p>
+          <p>I'm currently applying for <strong>Data Analyst and Business Analyst roles in the UK</strong>, with a preference for fintech, finance, and banking.</p>
+        </div>
+        <div class="about-facts reveal">
+          <div class="fact"><div class="k">based in</div><div class="v">Leeds, United Kingdom</div></div>
+          <div class="fact"><div class="k">education</div><div class="v">MSc Business Analytics & Decision Science, University of Leeds (2026)</div></div>
+          <div class="fact"><div class="k">background</div><div class="v">B.Tech Computer Science, SOA University</div></div>
+          <div class="fact"><div class="k">looking for</div><div class="v">Data Analyst / Business Analyst — fintech, finance, banking</div></div>
+        </div>
       </div>
-      <textarea name="message" placeholder="Message" required></textarea>
-      <button class="contactBtn" type="submit">Send</button>
-    </form>
+    </div>
+  </section>
 
-    <footer class="siteFooter">
-      <span>© <span id="year"></span> Tarun Jena</span>
-      <span class="footerNote">Built with HTML, CSS & JS</span>
-    </footer>
-  </div>
-</section>
+  <section id="work">
+    <div class="section-inner">
+      <div class="sec-head reveal">
+        <span class="tag">// selected work</span>
+        <h2>Four projects, one throughline: data that supports a real decision.</h2>
+        <p>From credit risk to sports forecasting — each project pairs a modelling technique with a business question worth answering.</p>
+      </div>
+      <div class="projects">
 
-  <script src="script.js"></script>
+        <div class="proj-card reveal tilt">
+          <div class="proj-index">01</div>
+          <div class="proj-body">
+            <h3>Credit Risk Decision System</h3>
+            <p>Gradient-boosted credit risk model with SHAP explainability, built so a loan officer can see exactly why a decision was made — not just what it was.</p>
+            <div class="proj-tags"><span>XGBoost</span><span>SHAP</span><span>Python</span></div>
+          </div>
+          <a class="proj-arrow magnetic" href="https://github.com/doppy-bot" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+        </div>
+
+        <div class="proj-card reveal tilt">
+          <div class="proj-index">02</div>
+          <div class="proj-body">
+            <h3>Payment Analytics A/B Pipeline</h3>
+            <p>dbt + DuckDB pipeline over 120K synthetic payment transactions, testing a fraud-check flow against a control group — 24 passing dbt tests, 46% fraud reduction measured with SciPy/statsmodels.</p>
+            <div class="proj-tags"><span>dbt</span><span>DuckDB</span><span>SciPy</span><span>statsmodels</span></div>
+          </div>
+          <a class="proj-arrow magnetic" href="https://github.com/doppy-bot/payment-analytics" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+        </div>
+
+        <div class="proj-card reveal tilt">
+          <div class="proj-index">03</div>
+          <div class="proj-body">
+            <h3>RAG Finance Assistant</h3>
+            <p>A retrieval-augmented assistant over financial documents, running on a local LLaMA 3.2 model via LangChain — built to answer finance questions with grounded, citable context instead of guesses.</p>
+            <div class="proj-tags"><span>LangChain</span><span>LLaMA 3.2</span><span>RAG</span></div>
+          </div>
+          <a class="proj-arrow magnetic" href="https://github.com/doppy-bot" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+        </div>
+
+        <div class="proj-card reveal tilt">
+          <div class="proj-index">04</div>
+          <div class="proj-body">
+            <h3>Premier League Prediction</h3>
+            <p>Random Forest classifier fed by a live football API, wrapped in a Monte Carlo simulation to turn single predictions into full season-outcome probability distributions.</p>
+            <div class="proj-tags"><span>Random Forest</span><span>Monte Carlo</span><span>API</span></div>
+          </div>
+          <a class="proj-arrow magnetic" href="https://github.com/doppy-bot" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="stats reveal">
+        <div class="stat"><div class="num" data-count="120" data-suffix="K+">0</div><div class="lbl">payment transactions</div></div>
+        <div class="stat"><div class="num" data-count="46" data-suffix="%">0</div><div class="lbl">fraud reduction</div></div>
+        <div class="stat"><div class="num" data-count="24" data-suffix="">0</div><div class="lbl">passing dbt tests</div></div>
+        <div class="stat"><div class="num" data-count="7" data-suffix="">0</div><div class="lbl">investor profiles</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-inner">
+      <div class="sec-head reveal">
+        <span class="tag">// toolkit</span>
+        <h2>What I build with.</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal"><h4>languages & querying</h4><p>Python, SQL, R — daily drivers across analysis, modelling, and pipelines.</p></div>
+        <div class="skill-card reveal"><h4>modelling & ML</h4><p>scikit-learn, XGBoost, SHAP — from baseline models to explainable predictions.</p></div>
+        <div class="skill-card reveal"><h4>data engineering</h4><p>dbt, DuckDB, PySpark — building tested, reproducible data pipelines.</p></div>
+        <div class="skill-card reveal"><h4>BI & reporting</h4><p>Power BI, Tableau — dashboards built for the person who has to act on them.</p></div>
+        <div class="skill-card reveal"><h4>applied AI</h4><p>LangChain, local LLM deployment — retrieval-augmented tools grounded in real documents.</p></div>
+        <div class="skill-card reveal"><h4>workflow</h4><p>Git, version-controlled analysis, documented and reproducible from raw data to result.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-box reveal">
+        <h2>Let's talk about your data problem.</h2>
+        <p>Open to Data Analyst and Business Analyst roles across the UK, especially in fintech, finance, and banking.</p>
+        <div class="contact-links">
+          <a href="mailto:tarunjena2001@gmail.com" class="btn btn-primary magnetic">tarunjena2001@gmail.com</a>
+          <a href="https://linkedin.com/in/tarun-jena07" target="_blank" rel="noopener" class="btn btn-ghost magnetic">LinkedIn</a>
+          <a href="https://github.com/doppy-bot" target="_blank" rel="noopener" class="btn btn-ghost magnetic">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 tarun jena</div>
+    <div>leeds, uk</div>
+  </footer>
+
+</div>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fineHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* nav shadow on scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+
+  /* scroll progress % */
+  const fill = document.getElementById('scrollFill');
+  const pctEl = document.getElementById('scrollPct');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? Math.min(100, Math.max(0, (scrolled / max) * 100)) : 0;
+    fill.style.height = pct + '%';
+    pctEl.textContent = String(Math.round(pct)).padStart(3,'0') + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  /* orb parallax */
+  const orb1 = document.getElementById('orb1'), orb2 = document.getElementById('orb2'), orb3 = document.getElementById('orb3');
+  if (!reduceMotion){
+    window.addEventListener('mousemove', (e) => {
+      const cx = window.innerWidth/2, cy = window.innerHeight/2;
+      const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
+      orb1.style.transform = `translate(${dx*26}px, ${dy*26}px)`;
+      orb2.style.transform = `translate(${dx*-22}px, ${dy*18}px)`;
+      orb3.style.transform = `translate(${dx*16}px, ${dy*-16}px)`;
+    }, {passive:true});
+  }
+
+  /* custom cursor */
+  if (fineHover && !reduceMotion){
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx=0,my=0, rx=0, ry=0;
+    window.addEventListener('mousemove', (e) => {
+      mx=e.clientX; my=e.clientY;
+      dot.style.left = mx+'px'; dot.style.top = my+'px';
+    }, {passive:true});
+    function ringLoop(){
+      rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+      ring.style.left = rx+'px'; ring.style.top = ry+'px';
+      requestAnimationFrame(ringLoop);
+    }
+    ringLoop();
+    document.querySelectorAll('a,button,.magnetic,.proj-card').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+  }
+
+  /* magnetic buttons */
+  if (fineHover && !reduceMotion){
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        el.style.transform = `translate(${x*0.25}px, ${y*0.35}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+    });
+  }
+
+  /* project card 3D tilt + spotlight */
+  document.querySelectorAll('.proj-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const px = e.clientX - r.left, py = e.clientY - r.top;
+      card.style.setProperty('--mx', px+'px');
+      card.style.setProperty('--my', py+'px');
+      if (fineHover && !reduceMotion && window.innerWidth > 760){
+        const rx = ((py / r.height) - 0.5) * -6;
+        const ry = ((px / r.width) - 0.5) * 6;
+        card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+      }
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)'; });
+  });
+
+  /* scroll-triggered reveals */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* animated counters */
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400, start = performance.now();
+        function tick(now){
+          const p = Math.min((now-start)/duration, 1);
+          const eased = 1 - Math.pow(1-p, 3);
+          el.textContent = Math.round(eased*target) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      }
+    });
+  }, {threshold:0.4});
+  document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+  /* typed role cycler */
+  const roles = ['Data Analyst', 'Business Analyst', 'MSc @ Leeds', 'Open to work — UK'];
+  const typedEl = document.getElementById('typedRole');
+  let roleIdx = 0, charIdx = 0, deleting = false;
+  function typeLoop(){
+    const current = roles[roleIdx];
+    if (!deleting){
+      charIdx++;
+      typedEl.textContent = current.slice(0, charIdx);
+      if (charIdx === current.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    } else {
+      charIdx--;
+      typedEl.textContent = current.slice(0, charIdx);
+      if (charIdx === 0){ deleting = false; roleIdx = (roleIdx+1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 35 : 55);
+  }
+  if (!reduceMotion) typeLoop(); else typedEl.textContent = roles[0];
+
+  /* interactive particle network — replaces the globe */
+  const canvas = document.getElementById('netCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [], mouse = {x:-9999, y:-9999};
+
+  function sizeCanvas(){
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    canvas.style.width = rect.width+'px';
+    canvas.style.height = rect.height+'px';
+    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    initParticles(rect.width, rect.height);
+  }
+
+  function initParticles(w,h){
+    const count = Math.floor((w*h)/9000);
+    particles = Array.from({length: Math.max(24, count)}, () => ({
+      x: Math.random()*w, y: Math.random()*h,
+      vx: (Math.random()-0.5)*0.35, vy: (Math.random()-0.5)*0.35,
+      r: Math.random()*1.6 + 1
+    }));
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
+  });
+  canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  function drawNetwork(){
+    const w = canvas.width/devicePixelRatio, h = canvas.height/devicePixelRatio;
+    ctx.clearRect(0,0,w,h);
+
+    for (const p of particles){
+      const dx = p.x - mouse.x, dy = p.y - mouse.y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < 110){
+        const force = (110-dist)/110;
+        p.x += (dx/dist)*force*1.4 || 0;
+        p.y += (dy/dist)*force*1.4 || 0;
+      }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      p.x = Math.max(0, Math.min(w, p.x));
+      p.y = Math.max(0, Math.min(h, p.y));
+    }
+
+    for (let i=0;i<particles.length;i++){
+      for (let j=i+1;j<particles.length;j++){
+        const a=particles[i], b=particles[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 130){
+          ctx.strokeStyle = `rgba(53,213,195,${0.16*(1-dist/130)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for (const p of particles){
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(233,234,239,0.75)';
+      ctx.fill();
+    }
+    requestAnimationFrame(drawNetwork);
+  }
+
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+  drawNetwork();
+</script>
+
 </body>
 </html>
